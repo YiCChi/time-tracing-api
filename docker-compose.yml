@@ -1,0 +1,45 @@
+version: '3'
+services:
+  api:
+    container_name: api
+    build: .
+    command: pnpm run start:dev
+    ports:
+      - ${api_port}:4000
+    volumes:
+      - ./src:/time-tracing-api/src
+      - ./dist:/time-tracing-api/dist
+      - ./migrations:/time-tracing-api/migrations
+      - ./package.json:/time-tracing-api/package.json
+      - ./pnpm-lock.yaml:/time-tracing-api/pnpm-lock.yaml
+      - ./tsconfig.json:/time-tracing-api/tsconfig.json
+      - ./tsconfig.build.json:/time-tracing-api/tsconfig.build.json
+    depends_on:
+      - postgres
+
+  postgres:
+    container_name: db
+    image: postgres
+    environment:
+      POSTGRES_USER: ${db_user}
+      POSTGRES_PASSWORD: ${db_password}
+      POSTGRES_DB: ${db_name}
+      TZ: 'Asia/Tokyo'
+    ports:
+      - ${db_port}:5432
+    volumes:
+      - db-data:/var/lib/postgresql/data
+
+  pgadmin:
+    container_name: pdadmin
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${pgadmin_email}
+      PGADMIN_DEFAULT_PASSWORD: ${pgadmin_password}
+    ports:
+      - ${pgadmin_port}:80
+    depends_on:
+      - postgres
+
+volumes:
+  db-data:
