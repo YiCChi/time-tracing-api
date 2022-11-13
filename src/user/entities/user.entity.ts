@@ -9,8 +9,8 @@ export class User {
   name: string;
 
   @Column()
-  account: string;
+  age: number;
 
-  @Column()
-  password: string;
+  @Column({ default: true })
+  isActive: boolean;
 }
