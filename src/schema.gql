@@ -2,33 +2,55 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type AuthPayload {
+  access_token: String!
+}
+
 input CreateUserInput {
-  age: Int!
-  isActive: Boolean!
-  name: String!
+  email: EmailAddress!
+  password: String!
+  userName: String!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+"""
+A field whose value conforms to the standard internet email address format as specified in RFC822: https://www.w3.org/Protocols/rfc822/.
+"""
+scalar EmailAddress @specifiedBy(url: "https://www.w3.org/Protocols/rfc822/")
+
+input LoginUserInput {
+  password: String!
+  userName: String!
 }
 
 type Mutation {
   createUser(createUserInput: CreateUserInput!): User!
-  removeUser(id: ID!): String!
+  login(loginUserInput: LoginUserInput!): AuthPayload!
+  removeUser(id: Int!): String!
   updateUser(updateUserInput: UpdateUserInput!): String!
 }
 
 type Query {
-  user(id: ID!): User
+  user(id: Int!): User
   users: [User]!
 }
 
 input UpdateUserInput {
-  age: Int
-  id: ID!
-  isActive: Boolean
-  name: String
+  email: EmailAddress
+  id: Int!
+  password: String
+  userName: String
 }
 
 type User {
-  age: Int!
-  id: ID!
-  isActive: Boolean!
-  name: String!
+  createdAt: DateTime!
+  email: EmailAddress!
+  id: Int!
+  password: String!
+  updatedAt: DateTime!
+  userName: String!
 }

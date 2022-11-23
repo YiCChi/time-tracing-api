@@ -1,11 +1,14 @@
 import { join } from 'path';
 import type { ApolloDriverConfig } from '@nestjs/apollo';
 import { ApolloDriver } from '@nestjs/apollo';
+import type { OnApplicationBootstrap } from '@nestjs/common';
 import { Module } from '@nestjs/common';
+import { APP_GUARD } from '@nestjs/core';
 import { GraphQLModule } from '@nestjs/graphql';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { AuthModule } from './auth/auth.module';
+import { JwtAuthGuard } from './auth/jwt-auth.guard';
+import { SeedService } from './seed/seed.service';
 import { UserModule } from './user/user.module';
 
 @Module({
@@ -15,6 +18,10 @@ import { UserModule } from './user/user.module';
       subscriptions: { 'graphql-ws': true },
       driver: ApolloDriver,
       sortSchema: true,
+      cors: {
+        origin: 'http://localhost:3000',
+        credentials: true,
+      },
     }),
     TypeOrmModule.forRoot({
       type: 'postgres',
@@ -31,8 +38,19 @@ import { UserModule } from './user/user.module';
       migrationsRun: false,
     }),
     UserModule,
+    AuthModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  providers: [SeedService, { provide: APP_GUARD, useClass: JwtAuthGuard }],
 })
-export class AppModule {}
+// TODO: seedingの実現を考える
+export class AppModule implements OnApplicationBootstrap {
+  private readonly _seedService: SeedService;
+
+  constructor(seedService: SeedService) {
+    this._seedService = seedService;
+  }
+
+  async onApplicationBootstrap() {
+    await this._seedService.seed();
+  }
+}

@@ -1,8 +1,11 @@
-import { Args, ID, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { Args, Int, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { AuthPayload } from './dto/auth-payload.output';
 import { CreateUserInput } from './dto/create-user.input';
+import { LoginUserInput } from './dto/login-user.input';
 import { UpdateUserInput } from './dto/update-user.input';
 import { User } from './entities/user.entity';
 import { UserService } from './user.service';
+import { Public } from 'src/common/decorator/public.decorator';
 
 @Resolver(() => User)
 export class UserResolver {
@@ -12,9 +15,15 @@ export class UserResolver {
     this._userService = userService;
   }
 
+  @Public()
+  @Mutation(() => AuthPayload)
+  async login(@Args('loginUserInput') loginUserInput: LoginUserInput) {
+    return this._userService.login(loginUserInput);
+  }
+
   @Mutation(() => User)
-  async createUser(@Args('createUserInput') createAuthorInput: CreateUserInput) {
-    return this._userService.create(createAuthorInput);
+  async createUser(@Args('createUserInput') createUserInput: CreateUserInput) {
+    return this._userService.create(createUserInput);
   }
 
   @Query(() => [User], { name: 'users', nullable: 'items' })
@@ -23,8 +32,8 @@ export class UserResolver {
   }
 
   @Query(() => User, { name: 'user', nullable: true })
-  async findOne(@Args('id', { type: () => ID }) id: number) {
-    return this._userService.findOne(id);
+  async findOne(@Args('id', { type: () => Int }) id: number) {
+    return this._userService.findOneById(id);
   }
 
   @Mutation(() => String)
@@ -33,7 +42,7 @@ export class UserResolver {
   }
 
   @Mutation(() => String)
-  async removeUser(@Args('id', { type: () => ID }) id: number) {
+  async removeUser(@Args('id', { type: () => Int }) id: number) {
     return this._userService.remove(id);
   }
 }
