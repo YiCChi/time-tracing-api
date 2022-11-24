@@ -25,6 +25,7 @@ export class AuthService {
     return null;
   }
 
+  // TODO: nameとidだけでいいのか検討する
   generateCredentials(user: User) {
     const payload = { userName: user.userName, sub: user.id };
 
