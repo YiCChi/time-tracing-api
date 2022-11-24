@@ -22,7 +22,7 @@ docker-compose up --attach api --build
 docker compose up --attach api --build
 ```
 
-Open [http://localhost:4000](http://localhost:4000/user) with your browser to see the result.
+Open [http://localhost:4000/graphql](http://localhost:4000/graphql) to check the graphql playground.
 
 ## Usage of pgAdmin
 
