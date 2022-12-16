@@ -23,3 +23,18 @@ docker compose up --attach api --build
 ```
 
 Open [http://localhost:4000](http://localhost:4000/user) with your browser to see the result.
+
+## Usage of pgAdmin
+
+- Open [http://localhost:8080](http://localhost:8080) and log in with account [here](https://github.com/YiCChi/time-tracing-api/blob/2c54ad525c1233f418e4ba7e63af787387939abd/.env#L9).
+- **Add New Server**
+- General
+  - Name: time-tracing-api or whatever you like.
+- Connection
+  - Host name/address: postgres
+  - Port: 5432
+  - Maintenance database: develop
+  - Username: postgres
+  - Password: password
+- **Save**
+- Servers - time-tracing-api - Database - develop - Schemas - public - Tables.
