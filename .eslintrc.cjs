@@ -48,6 +48,20 @@ module.exports = {
         format: ['camelCase'],
       },
       {
+        selector: [
+          'classProperty',
+          'objectLiteralProperty',
+          'typeProperty',
+          'classMethod',
+          'objectLiteralMethod',
+          'typeMethod',
+          'accessor',
+          'enumMember',
+        ],
+        format: null,
+        modifiers: ['requiresQuotes'],
+      },
+      {
         selector: 'variable',
         format: ['camelCase', 'UPPER_CASE'],
       },
@@ -87,6 +101,7 @@ module.exports = {
       { allowAliases: 'in-unions-and-intersections', allowLiterals: 'in-unions-and-intersections' },
     ],
     '@typescript-eslint/no-unnecessary-qualifier': 'warn',
+    '@typescript-eslint/no-unsafe-call': 'off',
     '@typescript-eslint/no-unused-expressions': 'error',
     '@typescript-eslint/no-unused-vars': 'error',
     '@typescript-eslint/no-use-before-define': 'error',
