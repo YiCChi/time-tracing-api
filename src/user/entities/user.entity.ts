@@ -1,4 +1,4 @@
-import { Field, ObjectType } from '@nestjs/graphql';
+import { Field, ObjectType, Int } from '@nestjs/graphql';
 import { GraphQLEmailAddress } from 'graphql-scalars';
 import { Entity, Column } from 'typeorm';
 import { BaseEntity } from '../../common/entities/base.entity';
@@ -12,7 +12,7 @@ export class User extends BaseEntity {
   @Field()
   userName: string;
 
-  @Column()
+  @Column({ unique: true })
   @Field(() => GraphQLEmailAddress)
   email: string;
 
@@ -20,8 +20,16 @@ export class User extends BaseEntity {
   @Field()
   password: string;
 
+  @Column()
+  @Field(() => Int)
+  position: number;
+
+  @Column()
+  @Field(() => Int)
+  paidVacation: number;
+
   createEntity<Key extends keyof CreateUserInput>(key: Key, value: CreateUserInput[Key]) {
-    this[key] = value;
+    (this[key] as unknown) = value;
   }
 
   updateEntity<Key extends keyof UpdateUserInput>(key: Key, value: UpdateUserInput[Key]) {
