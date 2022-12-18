@@ -8,6 +8,7 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './auth/auth.module';
 import { JwtAuthGuard } from './auth/jwt-auth.guard';
+import { ProjectModule } from './project/project.module';
 import { SeedService } from './seed/seed.service';
 import { UserModule } from './user/user.module';
 
@@ -38,6 +39,7 @@ import { UserModule } from './user/user.module';
       migrationsRun: false,
     }),
     UserModule,
+    ProjectModule,
     AuthModule,
   ],
   providers: [SeedService, { provide: APP_GUARD, useClass: JwtAuthGuard }],
