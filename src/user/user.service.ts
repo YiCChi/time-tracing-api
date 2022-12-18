@@ -56,8 +56,8 @@ export class UserService {
     return this._repo.findOneBy({ id });
   }
 
-  async findOneByName(userName: string) {
-    return this._repo.findOneBy({ userName });
+  async findOneByName(name: string) {
+    return this._repo.findOneBy({ name });
   }
 
   async update(updateUserInput: UpdateUserInput) {

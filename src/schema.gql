@@ -8,10 +8,10 @@ type AuthPayload {
 
 input CreateUserInput {
   email: EmailAddress!
+  name: String!
   paidVacation: Int!
   password: String!
   position: Int!
-  userName: String!
 }
 
 """
@@ -44,19 +44,19 @@ type Query {
 input UpdateUserInput {
   email: EmailAddress
   id: Int!
+  name: String
   paidVacation: Int
   password: String
   position: Int
-  userName: String
 }
 
 type User {
   createdAt: DateTime!
   email: EmailAddress!
   id: Int!
+  name: String!
   paidVacation: Int!
   password: String!
   position: Int!
   updatedAt: DateTime!
-  userName: String!
 }

@@ -10,7 +10,7 @@ import type { UpdateUserInput } from '../dto/update-user.input';
 export class User extends BaseEntity {
   @Column()
   @Field()
-  userName: string;
+  name: string;
 
   @Column({ unique: true })
   @Field(() => GraphQLEmailAddress)

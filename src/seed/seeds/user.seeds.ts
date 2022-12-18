@@ -14,7 +14,7 @@ async function createNewUser(
   const user = new User();
 
   user.id = id;
-  user.userName = userName;
+  user.name = userName;
   user.email = email;
   user.password = await bcrypt.hash(password, SALT_OR_ROUNDS);
   user.position = position;

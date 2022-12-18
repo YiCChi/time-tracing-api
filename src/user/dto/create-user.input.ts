@@ -4,7 +4,7 @@ import { GraphQLEmailAddress } from 'graphql-scalars';
 @InputType()
 export class CreateUserInput {
   @Field()
-  userName: string;
+  name: string;
 
   @Field(() => GraphQLEmailAddress)
   email: string;

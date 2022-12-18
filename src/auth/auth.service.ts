@@ -27,7 +27,7 @@ export class AuthService {
 
   // TODO: nameとidだけでいいのか検討する
   generateCredentials(user: User) {
-    const payload = { userName: user.userName, sub: user.id };
+    const payload = { userName: user.name, sub: user.id };
 
     return {
       // eslint-disable-next-line @typescript-eslint/naming-convention
