@@ -8,8 +8,7 @@ services:
       - ${api_port}:4000
     volumes:
       - ./src:/time-tracing-api/src
-      - ./dist:/time-tracing-api/dist
-      - ./migrations:/time-tracing-api/migrations
+      - ./db:/time-tracing-api/db
       - ./package.json:/time-tracing-api/package.json
       - ./pnpm-lock.yaml:/time-tracing-api/pnpm-lock.yaml
       - ./tsconfig.json:/time-tracing-api/tsconfig.json
