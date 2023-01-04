@@ -20,7 +20,8 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "typeorm": "typeorm-ts-node-commonjs"
+    "migration": "typeorm-ts-node-commonjs migration:run --dataSource=./db/dataSource.ts",
+    "fixtures": "fixtures-ts-node-commonjs load ./db/fixtures --dataSource=./db/dataSource.ts"
   },
   "dependencies": {
     "@nestjs/apollo": "^10.1.7",
@@ -74,6 +75,7 @@
     "ts-loader": "^9.4.2",
     "ts-node": "^10.9.1",
     "tsconfig-paths": "4.1.1",
+    "typeorm-fixtures-cli": "^3.0.2",
     "typescript": "^4.9.4",
     "webpack": "^5.75.0"
   },
