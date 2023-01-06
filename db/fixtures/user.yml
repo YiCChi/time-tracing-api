@@ -1,0 +1,8 @@
+entity: User
+processor: ../processor/user.processor.ts
+items:
+  user{1..10}:
+    id: ($current)
+    userName: user($current)
+    email: user($current)@example.com
+    password: '123456'
