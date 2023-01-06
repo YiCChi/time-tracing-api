@@ -8,9 +8,9 @@ type AuthPayload {
 
 input CreateProjectInput {
   code: String!
-  endTime: Int!
+  endDate: DateTime!
   name: String!
-  startTime: Int!
+  startDate: DateTime!
 }
 
 input CreateUserInput {
@@ -47,10 +47,10 @@ type Mutation {
 type Project {
   code: String!
   createdAt: DateTime!
-  endTime: Int!
+  endDate: DateTime!
   id: Int!
   name: String!
-  startTime: Int!
+  startDate: DateTime!
   updatedAt: DateTime!
 }
 
@@ -63,10 +63,10 @@ type Query {
 
 input UpdateProjectInput {
   code: String
-  endTime: Int
+  endDate: DateTime
   id: Int!
   name: String
-  startTime: Int
+  startDate: DateTime
 }
 
 input UpdateUserInput {

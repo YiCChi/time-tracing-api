@@ -1,4 +1,4 @@
-import { Field, InputType, Int } from '@nestjs/graphql';
+import { Field, InputType } from '@nestjs/graphql';
 
 @InputType()
 export class CreateProjectInput {
@@ -8,9 +8,9 @@ export class CreateProjectInput {
   @Field()
   code: string;
 
-  @Field(() => Int)
-  startTime: number;
+  @Field()
+  startDate: Date;
 
-  @Field(() => Int)
-  endTime: number;
+  @Field()
+  endDate: Date;
 }

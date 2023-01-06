@@ -1,4 +1,4 @@
-import { Field, Int, ObjectType } from '@nestjs/graphql';
+import { Field, ObjectType } from '@nestjs/graphql';
 import { Entity, Column } from 'typeorm';
 import { BaseEntity } from '../../common/entities/base.entity';
 import type { CreateProjectInput } from '../dto/create-project.input';
@@ -16,12 +16,12 @@ export class Project extends BaseEntity {
   code: string;
 
   @Column()
-  @Field(() => Int)
-  startTime: number;
+  @Field()
+  startDate: Date;
 
   @Column()
-  @Field(() => Int)
-  endTime: number;
+  @Field()
+  endDate: Date;
 
   createEntity<Key extends keyof CreateProjectInput>(key: Key, value: CreateProjectInput[Key]) {
     (this[key] as unknown) = value;
