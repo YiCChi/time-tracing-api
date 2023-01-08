@@ -8,7 +8,6 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './auth/auth.module';
 import { JwtAuthGuard } from './auth/jwt-auth.guard';
 import { ProjectModule } from './project/project.module';
-import { SeedService } from './seed/seed.service';
 import { UserModule } from './user/user.module';
 
 @Module({
