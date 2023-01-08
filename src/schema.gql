@@ -6,6 +6,13 @@ type AuthPayload {
   access_token: String!
 }
 
+input CreateProjectInput {
+  code: String!
+  endDate: DateTime!
+  name: String!
+  startDate: DateTime!
+}
+
 input CreateUserInput {
   email: EmailAddress!
   password: String!
@@ -28,15 +35,38 @@ input LoginUserInput {
 }
 
 type Mutation {
+  createProject(createProjectInput: CreateProjectInput!): Project!
   createUser(createUserInput: CreateUserInput!): User!
   login(loginUserInput: LoginUserInput!): AuthPayload!
+  removeProject(id: Int!): String!
   removeUser(id: Int!): String!
+  updateProject(updateProjectInput: UpdateProjectInput!): String!
   updateUser(updateUserInput: UpdateUserInput!): String!
 }
 
+type Project {
+  code: String!
+  createdAt: DateTime!
+  endDate: DateTime!
+  id: Int!
+  name: String!
+  startDate: DateTime!
+  updatedAt: DateTime!
+}
+
 type Query {
+  project(id: Int!): Project
+  projects: [Project]!
   user(id: Int!): User
   users: [User]!
+}
+
+input UpdateProjectInput {
+  code: String
+  endDate: DateTime
+  id: Int!
+  name: String
+  startDate: DateTime
 }
 
 input UpdateUserInput {
