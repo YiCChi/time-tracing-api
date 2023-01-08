@@ -1,0 +1,8 @@
+entity: Project
+items:
+  project{1..10}:
+    id: ($current)
+    name: project($current)
+    code: A000($current-1)
+    startDate: 20000101
+    endDate: 21001231
