@@ -11,15 +11,19 @@
 Install dependencies locally:
 
 ```bash
-pnpm install
+pnpm i
 ```
 
-Then, run the development server:
+Then, start the database:
 
 ```bash
-docker-compose up --attach api --build
-# or if enabled docker compose v2
-docker compose up --attach api --build
+docker-compose up
+```
+
+Then, start the development server:
+
+```bash
+pnpm run start:dev
 ```
 
 Open [http://localhost:4000/graphql](http://localhost:4000/graphql) to check the graphql playground.
@@ -29,7 +33,7 @@ Open [http://localhost:4000/graphql](http://localhost:4000/graphql) to check the
 Use [typeorm-fixtures](https://github.com/RobinCK/typeorm-fixtures) for seeding.
 
 - add new fixture to `./db/fixtures`
-- run `docker-compose run api pnpm fixtures`
+- run `pnpm fixtures`
 
 ## Usage of pgAdmin
 
