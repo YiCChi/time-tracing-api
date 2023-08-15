@@ -1,10 +1,9 @@
 module.exports = {
   plugins: ['@typescript-eslint'],
   extends: [
-    'plugin:@typescript-eslint/recommended',
-    'plugin:@typescript-eslint/recommended-requiring-type-checking',
-    'plugin:@typescript-eslint/strict',
-    'plugin:import/recommended',
+    'eslint:recommended',
+    'plugin:@typescript-eslint/strict-type-checked',
+    'plugin:@typescript-eslint/stylistic-type-checked',
     'plugin:import/recommended',
     'plugin:import/typescript',
     'prettier',
@@ -35,32 +34,12 @@ module.exports = {
   rules: {
     'import/order': ['error', { alphabetize: { order: 'asc' } }],
     'import/no-duplicates': 'error',
-    '@typescript-eslint/array-type': ['error', { default: 'generic' }],
     '@typescript-eslint/consistent-type-exports': 'error',
     '@typescript-eslint/consistent-type-imports': 'error',
-    '@typescript-eslint/default-param-last': 'error',
     '@typescript-eslint/member-ordering': 'error',
     '@typescript-eslint/method-signature-style': 'error',
     '@typescript-eslint/naming-convention': [
       'error',
-      {
-        selector: 'default',
-        format: ['camelCase'],
-      },
-      {
-        selector: [
-          'classProperty',
-          'objectLiteralProperty',
-          'typeProperty',
-          'classMethod',
-          'objectLiteralMethod',
-          'typeMethod',
-          'accessor',
-          'enumMember',
-        ],
-        format: null,
-        modifiers: ['requiresQuotes'],
-      },
       {
         selector: 'variable',
         format: ['camelCase', 'UPPER_CASE'],
@@ -71,50 +50,46 @@ module.exports = {
         leadingUnderscore: 'allow',
       },
       {
-        selector: 'memberLike',
-        modifiers: ['private'],
-        format: ['camelCase'],
-        leadingUnderscore: 'require',
-      },
-
-      {
         selector: 'typeLike',
         format: ['PascalCase'],
       },
       {
         selector: 'function',
-        modifiers: ['exported'],
-        format: ['camelCase', 'PascalCase'],
+        format: ['camelCase'],
       },
     ],
-
-    '@typescript-eslint/no-dupe-class-members': 'error',
     '@typescript-eslint/no-extraneous-class': 'off',
-    '@typescript-eslint/no-invalid-this': 'error',
-    '@typescript-eslint/no-loop-func': 'error',
-    '@typescript-eslint/no-redeclare': 'error',
-    '@typescript-eslint/no-redundant-type-constituents': 'warn',
-    '@typescript-eslint/no-require-imports': 'warn',
-    '@typescript-eslint/no-shadow': 'error',
-    '@typescript-eslint/no-type-alias': [
-      'error',
-      { allowAliases: 'in-unions-and-intersections', allowLiterals: 'in-unions-and-intersections' },
-    ],
-    '@typescript-eslint/no-unnecessary-qualifier': 'warn',
-    '@typescript-eslint/no-unsafe-call': 'off',
-    '@typescript-eslint/no-unused-expressions': 'error',
-    '@typescript-eslint/no-unused-vars': 'error',
-    '@typescript-eslint/no-use-before-define': 'error',
-    '@typescript-eslint/no-useless-empty-export': 'warn',
-    '@typescript-eslint/parameter-properties': ['error', { allow: 'readonly' }],
-    '@typescript-eslint/prefer-enum-initializers': 'warn',
+    '@typescript-eslint/no-import-type-side-effects': 'error',
+    '@typescript-eslint/no-confusing-void-expression': 'off',
+    '@typescript-eslint/prefer-enum-initializers': 'error',
     '@typescript-eslint/prefer-readonly': 'error',
-    '@typescript-eslint/prefer-regexp-exec': 'warn',
+    '@typescript-eslint/prefer-regexp-exec': 'error',
     '@typescript-eslint/promise-function-async': 'error',
-    '@typescript-eslint/require-array-sort-compare': ['error', { ignoreStringArray: true }],
-    '@typescript-eslint/return-await': 'error',
-    '@typescript-eslint/sort-type-union-intersection-members': 'error',
+    '@typescript-eslint/sort-type-constituents': 'error',
     '@typescript-eslint/switch-exhaustiveness-check': 'error',
+
+    // extension rules
+    'default-param-last': 'off',
+    '@typescript-eslint/default-param-last': 'error',
+    'init-declarations': 'off',
+    '@typescript-eslint/init-declarations': 'error',
+    'no-dupe-class-members': 'off',
+    '@typescript-eslint/no-dupe-class-members': 'error',
+    'no-invalid-this': 'off',
+    '@typescript-eslint/no-invalid-this': 'error',
+    'no-loop-func': 'off',
+    '@typescript-eslint/no-loop-func': 'error',
+    'no-redeclare': 'off',
+    '@typescript-eslint/no-redeclare': 'error',
+    'no-unused-expressions': 'off',
+    '@typescript-eslint/no-unused-expressions': 'error',
+    'no-unused-vars': 'off',
+    '@typescript-eslint/no-unused-vars': [
+      'error',
+      { argsIgnorePattern: '^_', destructuredArrayIgnorePattern: '^_' },
+    ],
+    'no-use-before-define': 'off',
+    '@typescript-eslint/no-use-before-define': 'error',
 
     // Formatting is almost using prettier. Only use these 3 formatting rules in linter.
     '@typescript-eslint/lines-between-class-members': 'error',
@@ -158,4 +133,12 @@ module.exports = {
       },
     ],
   },
+  overrides: [
+    {
+      'files': ['src/**/*.spec.ts', '**/*.e2e-spec.ts'],
+      rules: {
+        '@typescript-eslint/init-declarations': 'off'
+      }
+    }
+  ]
 };
