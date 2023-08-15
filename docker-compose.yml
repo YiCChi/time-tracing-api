@@ -1,21 +1,5 @@
 version: '3'
 services:
-  api:
-    container_name: api
-    build: .
-    command: pnpm run start:dev
-    ports:
-      - ${api_port}:4000
-    volumes:
-      - ./src:/time-tracing-api/src
-      - ./db:/time-tracing-api/db
-      - ./package.json:/time-tracing-api/package.json
-      - ./pnpm-lock.yaml:/time-tracing-api/pnpm-lock.yaml
-      - ./tsconfig.json:/time-tracing-api/tsconfig.json
-      - ./tsconfig.build.json:/time-tracing-api/tsconfig.build.json
-    depends_on:
-      - postgres
-
   postgres:
     container_name: db
     image: postgres
