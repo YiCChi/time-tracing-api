@@ -15,10 +15,10 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
     this._reflector = reflector;
   }
 
-  getRequest(context: ExecutionContext) {
+  getRequest<T>(context: ExecutionContext) {
     const ctx = GqlExecutionContext.create(context);
-
-    return ctx.getContext<{ req: object }>().req;
+    
+    return ctx.getContext<{req: T}>().req;
   }
 
   canActivate(context: ExecutionContext): Observable<boolean> | Promise<boolean> | boolean {
