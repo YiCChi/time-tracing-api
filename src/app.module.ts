@@ -17,14 +17,10 @@ import { UserModule } from './user/user.module';
       subscriptions: { 'graphql-ws': true },
       driver: ApolloDriver,
       sortSchema: true,
-      cors: {
-        origin: 'http://localhost:3000',
-        credentials: true,
-      },
     }),
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: 'postgres',
+      host: 'localhost',
       port: 5432,
       username: 'postgres',
       password: 'password',
