@@ -1,4 +1,10 @@
-import { BadRequestException, forwardRef, Inject, Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  forwardRef,
+  Inject,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import * as bcrypt from 'bcrypt';
 import { Repository } from 'typeorm';
@@ -16,14 +22,17 @@ export class UserService {
 
   constructor(
     @InjectRepository(User) repo: Repository<User>,
-    @Inject(forwardRef(() => AuthService)) authService: AuthService
+    @Inject(forwardRef(() => AuthService)) authService: AuthService,
   ) {
     this._repo = repo;
     this._authService = authService;
   }
 
   async login(loginUserInput: LoginUserInput) {
-    const user = await this._authService.validateUser(loginUserInput.userName, loginUserInput.password);
+    const user = await this._authService.validateUser(
+      loginUserInput.userName,
+      loginUserInput.password,
+    );
 
     if (!user) {
       throw new BadRequestException('invalid username or password');

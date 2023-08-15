@@ -10,7 +10,10 @@ export class AuthService {
 
   private readonly _jwtService: JwtService;
 
-  constructor(@Inject(forwardRef(() => UserService)) userService: UserService, jwtService: JwtService) {
+  constructor(
+    @Inject(forwardRef(() => UserService)) userService: UserService,
+    jwtService: JwtService,
+  ) {
     this._userService = userService;
     this._jwtService = jwtService;
   }

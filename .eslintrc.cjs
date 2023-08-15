@@ -135,10 +135,10 @@ module.exports = {
   },
   overrides: [
     {
-      'files': ['src/**/*.spec.ts', '**/*.e2e-spec.ts'],
+      files: ['src/**/*.spec.ts', '**/*.e2e-spec.ts'],
       rules: {
-        '@typescript-eslint/init-declarations': 'off'
-      }
-    }
-  ]
+        '@typescript-eslint/init-declarations': 'off',
+      },
+    },
+  ],
 };
